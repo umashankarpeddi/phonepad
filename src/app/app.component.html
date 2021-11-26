@@ -1,0 +1,30 @@
+
+<div class="box">
+  <div class="alert alert-danger col-sm-3 offset-4" role="alert" *ngIf="invalidPhoneNumber">
+    Please enter valid phone number
+  </div>
+  <form id="demoForm" method="POST">
+    <div class="form-group row">
+      <div class="col-sm-3 offset-4">
+        <input type="text" class="form-control" #phoneNumber name="phoneNumber" placeholder="Enter phone number" />
+      </div>
+    </div>
+    <div class="form-group row margin-top-10">
+      <div class="col-sm-3 offset-4">
+        <button type="submit" class="btn btn-primary whole-width" (click)="validatePhoneNumber(phoneNumber.value)">Validate</button>
+      </div>
+    </div>
+  </form>
+
+  <br>
+  <div *ngIf="combinations?.length > 0">
+    <h5 class="offset-4">Total number of combinations: {{combinations?.length}}</h5>
+    <br>
+    <div class="offset-4">
+      <pagination-controls (pageChange)="pageNumber = $event"></pagination-controls>
+    </div>
+    <div *ngFor="let item of combinations | paginate: { itemsPerPage: 10, currentPage: pageNumber }">
+      <h6 class="offset-5">{{item}}</h6><br>
+    </div>
+  </div>
+</div>
